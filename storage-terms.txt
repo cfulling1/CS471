@@ -1,0 +1,112 @@
+From storage chapters of OSTEP - http://pages.cs.wisc.edu/~remzi/OSTEP
+
+
+** Chapter 36 I/O Devices **
+
+Figure 36.2 - layout of system
+
+Acronyms - DMI direct memory interface, SATA serial AT attachment, USB universal serial bus
+
+Hardware versus firmware versus software
+
+interrupts, interrup service routine (aka interrupt handler)
+
+DMA direct memory access
+
+Interacting with devices - CPU instructions (in/out) or memory-mapped I/O (in hardware)
+
+Device driver
+  - code that runs to deal with devices, one for every device in the system
+  - interrupt service request
+
+** Chapter 37 - hard disk drives **
+
+Read/write in 512 byte blocks
+
+5ms for seek
+
+disk track, head, arm, plater, RPM, latency from rotational delay, seek from moving arm, cache
+
+write through versus write back
+
+disk scheduling - SSTF shortest seek time first, elevator SCAN / circular C-SCAN / freeze F-SCAN, SPTF shortest positioning time first
+
+
+** Chapter 38 - RAID **
+
+RAID levels - 0 simple striping, 1 mirroring, 4 parity disk, 5 rotating parity
+
+For each level - redundancy versus performance versus recovery
+- throughput
+- MTTF
+- time to rebuild
+
+Note - use the same exact disk for all of them, always have a spare
+
+
+
+** Chapter 39 Files and directories **
+
+inode
+
+file system calls - open, read, write, close, lseek, fsync, fstat, unlink, mkdir, readdir, rmdir
+
+notes - shared file descriptions from fork, dup, threads, reference/link counts, soft/symbolic (full path) versus hard links (inode #), permission bits, ACL access control list
+
+mount, unmount
+
+
+
+** Chapter 40 File system implementation **
+
+superblock, blocks, data bitmap, inode bitmap, inode index node,
+
+figure 40.1 - inode contents
+
+pointers in inodes - inode, indirect / double / triple
+
+directories - section 40.4 example
+
+lifetime of a request to read a file - directories, inodes, etc.
+
+what needs updating when writing or creating a file
+
+cacheing/buffering - just know that it can happen
+
+
+
+** Chapter 41 locality and the fast file system **
+
+what was bad - fragmentation of files/inodes, blocks too small (512 bytes)
+
+cylinder group - but disk should arrange the block numbers nicely for us.  so...
+
+block group - includes super block, inode bitmap, data bitmap, inodes, data
+
+4k blocks
+
+where to put files/directories - put similar things close, keep different things far
+
+large file exception to putting everything close
+
+small files - sub-block
+
+e.g., - do not fill a file system from beginning to end.  why?
+
+
+
+** Chapters 42+ **
+
+Most important question/idea from each. Somewhat TBD right now.
+
+Chapter 42 - why journaling?
+
+Chapter 43 - cute idea - log-structured FS, what workload is it good for?
+
+Chapter 44 - flash-based SSDs - what changes? ** I don't know/remember, so skip this for now **
+
+Chapter 45 - Data integrity and protection
+
+Chapter 48-50 - distributed systems
+- Choices that need to be made - performance versus recoverability versus simultaneous use
+- Compare/contrast AFS versus NFS

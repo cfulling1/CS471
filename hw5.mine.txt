@@ -1,0 +1,14 @@
+change the 10 million value in your hw5a_lock.c program until the program takes 
+around 3 seconds to complete. What value do you get (instead of 10 million)?
+
+  I changed the value to 25 million and it takes about 3 seconds with the 
+  counter ending at 50 million
+
+
+
+Change your hw5a_bad.c program to use the same value; how long does it take now, 
+and what total does the bad program produce?
+
+  It took about half a second and the counter went up to 25 million, more than 
+  double the original amount
+
